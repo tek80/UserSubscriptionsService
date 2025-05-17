@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: UserSubscriptionsService
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5435/subsdb}
+    username: ${DATASOURCE_USERNAME:user01}
+    password: ${DATASOURCE_PASSWORD:user01}
+  jpa:
+    show-sql: true
+    hibernate:
+        ddl-auto: none

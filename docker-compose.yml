@@ -1,0 +1,26 @@
+services:
+  postgres-user-subs:
+    container_name: pg-user-subs
+    image: postgres:16
+    environment:
+      POSTGRES_DB: "subsdb"
+      POSTGRES_USER: "user01"
+      POSTGRES_PASSWORD: "user01"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - data_pg:/var/lib/postgresql/data
+    ports:
+      - "5432"
+  app-user-subs:
+    container_name: app-user-subs
+    image: app-user-subs
+    build:
+      context: .
+    environment:
+      DATASOURCE_URL: "jdbc:postgresql://postgres-user-subs:5432/subsdb"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres-user-subs
+volumes:
+  data_pg:
